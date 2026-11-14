@@ -24,9 +24,10 @@ IGN = 255
 
 
 class FloodDS(Dataset):
-    def __init__(self, scenes, augment=False, nbands=0, chipdir=None):
+    def __init__(self, scenes, augment=False, nbands=0, chipdir=None, bands=None):
         self.items = []
         self.nb = nbands or 0
+        self.bands = bands
         self.aug = augment
         self.dir = chipdir or CHIP_DIR
         self.cache = {}
@@ -42,7 +43,9 @@ class FloodDS(Dataset):
         s, i = self.items[k]
         img, msk = self.cache[s]
         x = img[i]
-        if self.nb:
+        if self.bands:
+            x = x[self.bands]
+        elif self.nb:
             x = x[:self.nb]
         x = x.astype(np.float32) / 10000.0
         y = msk[i].astype(np.int64)
@@ -95,11 +98,13 @@ def evaluate(model, loader, device):
 
 
 def run_fold(fold, train_scenes, val_scenes, args, device, chipdir=None):
-    tr = DataLoader(FloodDS(train_scenes, True, args.nbands, chipdir), batch_size=args.bs,
+    tr = DataLoader(FloodDS(train_scenes, True, args.nbands, chipdir, getattr(args, "bands_list", None)), batch_size=args.bs,
                     shuffle=True, num_workers=4, drop_last=True)
-    va = DataLoader(FloodDS(val_scenes, False, args.nbands, chipdir), batch_size=8,
+    va = DataLoader(FloodDS(val_scenes, False, args.nbands, chipdir, getattr(args, "bands_list", None)), batch_size=8,
                     shuffle=False, num_workers=2)
-    model = UNet(in_ch=args.nbands or args.ch, ds=bool(args.ds), se=False).to(device)
+    BL = getattr(args, "bands_list", None)
+    in_ch = len(BL) if BL else (args.nbands or args.ch)
+    model = UNet(in_ch=in_ch, ds=bool(args.ds), se=False).to(device)
     opt = torch.optim.Adam(model.parameters(), lr=args.lr)
     sched = torch.optim.lr_scheduler.CosineAnnealingLR(opt, args.epochs, eta_min=1e-5)
     best, best_ep = -1, -1
@@ -112,7 +117,13 @@ def run_fold(fold, train_scenes, val_scenes, args, device, chipdir=None):
             logit = model(x).squeeze(1)
             valid = y != IGN
             bce = F.binary_cross_entropy_with_logits(logit[valid], y[valid].float())
-            loss = bce + 0.5 * dice_loss(logit, y, valid)
+            if args.loss == "bce":
+                loss = bce
+            elif args.loss == "focal":
+                pt = torch.exp(-bce)
+                loss = (1 - pt) ** 2 * bce
+            else:
+                loss = bce + 0.5 * dice_loss(logit, y, valid)
             opt.zero_grad()
             loss.backward()
             opt.step()
@@ -140,12 +151,15 @@ def main():
     ap.add_argument("--ch", type=int, default=16)
     ap.add_argument("--ds", type=int, default=1, help="1=depthwise separable, 0=standard")
     ap.add_argument("--nbands", type=int, default=0, help="use first N bands (0=all)")
+    ap.add_argument("--bands", default="", help="comma list of band indices to keep")
     ap.add_argument("--tag", default="base")
     ap.add_argument("--chipdir", default="")
+    ap.add_argument("--loss", default="dicebce")
     ap.add_argument("--folds", default="0,1,2,3,4")
     args = ap.parse_args()
 
     chipdir = args.chipdir or CHIP_DIR
+    args.bands_list = [int(v) for v in args.bands.split(",")] if args.bands else None
     scenes = sorted(os.path.basename(p).replace(".npz", "")
                     for p in glob.glob(os.path.join(chipdir, "*.npz")))
     print("scenes:", len(scenes), flush=True)

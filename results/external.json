@@ -1,0 +1,69 @@
+{
+ "events": {
+  "world_floods_EMSR271_02FARKADONA_DEL_v1_": {
+   "iou": 0.5390957516992826,
+   "n": 247
+  },
+  "world_floods_EMSR279_05ZARAGOZA_DEL_MONI": {
+   "iou": 50.754141340054154,
+   "n": 831
+  },
+  "world_floods_EMSR280_03FALUN_DEL_MONIT06": {
+   "iou": 97.67568134099226,
+   "n": 1080
+  },
+  "world_floods_EMSR286_08ITUANGONORTH_DEL_": {
+   "iou": 91.37115839243499,
+   "n": 126
+  },
+  "world_floods_EMSR286_09ITUANGOSOUTH_DEL_": {
+   "iou": 99.52840781495621,
+   "n": 11
+  },
+  "world_floods_EMSR287_05MAGWITZ_DEL_v1_ob": {
+   "iou": 95.70964643461556,
+   "n": 35
+  },
+  "world_floods_EMSR333_01RATTALORO_DEL_MON": {
+   "iou": 13.66120218579235,
+   "n": 31
+  },
+  "world_floods_EMSR333_02PORTOPALO_DEL_MON": {
+   "iou": 90.01071420429936,
+   "n": 85
+  },
+  "world_floods_EMSR342_06NORTHNORMANTON_DE": {
+   "iou": 78.0841206496108,
+   "n": 752
+  },
+  "world_floods_EMSR342_07SOUTHNORMANTON_DE": {
+   "iou": 0.003731237525916853,
+   "n": 575
+  },
+  "world_floods_EMSR347_06MWANZA_DEL_v1_obs": {
+   "iou": 82.25600031502884,
+   "n": 2492
+  },
+  "world_floods_EMSR347_07ZOMBA_DEL_MONIT01": {
+   "iou": 29.097133076593924,
+   "n": 328
+  },
+  "world_floods_EMSR347_07ZOMBA_DEL_v2_obse": {
+   "iou": 69.6237139362544,
+   "n": 36
+  },
+  "world_floods_EMSR9284_01YLITORNIONORTHER": {
+   "iou": 94.13081795894995,
+   "n": 55
+  },
+  "world_floods_RS2_20161008_Water_Extent_C": {
+   "iou": 0.0,
+   "n": 32
+  },
+  "world_floods_ST1_20161014_WaterExtent_Bi": {
+   "iou": 77.44594877034903,
+   "n": 128
+  }
+ },
+ "mean": 60.618219588072314
+}

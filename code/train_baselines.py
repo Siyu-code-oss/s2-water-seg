@@ -23,6 +23,8 @@ ARCH = {
                                        in_channels=16, classes=1),
     "deeplab": lambda: smp.DeepLabV3Plus("resnet50", encoder_weights=None,
                                          in_channels=16, classes=1),
+    "segformer": lambda: smp.Unet("mit_b0", encoder_weights=None,
+                                  in_channels=16, classes=1),
 }
 
 
