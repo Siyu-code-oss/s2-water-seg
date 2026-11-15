@@ -92,7 +92,7 @@ ABSTRACT = (
     "提出一种多波段输入的轻量化U-Net方法。以深度可分离卷积替换标准卷积，将参数量压缩至1.07×10⁶；"
     "输入为13个Sentinel-2光谱波段（原始张量保留16通道，其中3个质量通道在训练子集中恒为零）。"
     "在USGS子集上按场景开展5折交叉验证，模型IoU达{IoU_BASE}%、F1为{F1_BASE}%、总体精度为{OA_BASE}%，"
-    "高于标准U-Net（{STD_IoU}%）、U-Net++（{U_IoU}%）与DeepLabV3+（{D_IoU}%），参数量仅为其13.7%~4.0%。"
+    "高于标准U-Net（{STD_IoU}%）、U-Net++（{U_IoU}%）与DeepLabV3+（{D_IoU}%），参数量分别为三者的13.7%、4.1%与4.0%。"
     "波段消融显示：缺失近红外时IoU降至{B4_IoU}%，含近红外的4波段输入为{RGB_IoU}%，与13波段相当，"
     "说明判别信息在近红外已基本饱和；引入NDWI通道可进一步升至{NDWI_IoU}%。"
     "经时相一致性筛选后，5个独立WorldFloods事件的外部验证IoU达91.00%；模型无需微调即可迁移至"
@@ -148,8 +148,8 @@ style_run(p.add_run("Abstract: "), 9, TNR, TNR, True)
 style_run(p.add_run(EN_ABS), 9, en=TNR)
 p = para(indent=False, after=8, spacing=1.32, size=9, en=TNR)
 style_run(p.add_run("Key words: "), 9, TNR, TNR, True)
-style_run(p.add_run("flood inundation; Sentinel-2; deep learning; U-Net; multi-band "
-                    "fusion; Poyang Lake"), 9, en=TNR)
+style_run(p.add_run("surface water extraction; Sentinel-2; depthwise separable convolution; "
+                    "U-Net; multi-band fusion; Poyang Lake"), 9, en=TNR)
 
 # ---------------- 正文 ----------------
 h1("0　引言")
@@ -220,19 +220,20 @@ caption("表3　不同方法的5折交叉验证结果", before=4, after=2, keep_
 MET = {"std": ("92.45", "99.14", "98.01", "87.94"), "unetpp": ("91.54", "99.07", "96.93", "87.35"),
        "deeplab": ("92.67", "99.18", "97.90", "88.37"), "segformer": ("92.81", "99.23", "96.78", "89.46"),
        "base": ("93.20", "99.13", "98.56", "88.79"), "ndwi": ("93.60", "99.32", "98.18", "89.76")}
-rows.append(["NDWI>0（物理阈值）", "80.44±18.54", "88.15", "99.00", "91.05", "87.33", "—"])
 rows.append(["MNDWI>0（物理阈值）", "60.78±23.87", "73.39", "96.48", "63.95", "87.68", "—"])
+rows.append(["NDWI>0（物理阈值）", "80.44±18.54", "88.15", "99.00", "91.05", "87.33", "—"])
 rows = []
 for tag, name, par in [("std", "标准U-Net", "7.78"), ("unetpp", "U-Net++", "26.12"),
-                       ("deeplab", "DeepLabV3+", "26.72"), ("segformer", "SegFormer（mit_B0）", "5.56"),
+                       ("deeplab", "DeepLabV3+", "26.72"), ("segformer", "SegFormer（MiT-B0）", "5.56"),
                        ("base", "本文（13 光谱波段）", "1.07")]:
     f1, oa, pr, rc = MET[tag]
     rows.append([name, ms(folds(tag)), f1, oa, pr, rc, par])
 f1, oa, pr, rc = MET["ndwi"]
 rows.append(["本文+NDWI（17 通道）", ms(folds("ndwi")), f1, oa, pr, rc, "1.07"])
+rows.append(["MNDWI>0（物理阈值）", "60.78±23.87", "73.39", "96.48", "63.95", "87.68", "—"])
 three_line(["方法", "IoU/%", "F1/%", "OA/%", "精确率/%", "召回率/%", "参数量/10⁶"],
            rows, [4.2, 2.5, 2.0, 2.0, 2.2, 2.2, 2.0], fsize=8.5)
-para("注：IoU为5折交叉验证结果，各折按场景划分、互不重叠；参数量为模型总参数；"
+para("注：IoU为5折验证集结果的均值±标准差（折级口径）；F1、OA、精确率与召回率为各折结果的均值；参数量为模型总参数；"
      "物理阈值法指NDWI或MNDWI直接以0为阈值二值化。",
      size=9, indent=False, before=2, after=6)
 para("作为对照，若将阈值交由Otsu法在训练场景上自动确定，NDWI与MNDWI的5折IoU分别降至"
@@ -246,7 +247,7 @@ t = S3_REST[0]
 for txt in t[1]:
     para(txt.format(**NUM))
 add_figure(os.path.join(FIGDIR, "fig_box.png"), 12.6)
-caption("图4　不同方法的逐场景IoU分布（33个场景）", before=4)
+caption("图4　不同方法的逐场景宏平均IoU分布（33个场景等权）", before=4)
 add_figure(os.path.join(FIGDIR, "fig_vis.png"), 15.2)
 caption("图5　典型场景的提取结果对比：各列依次为影像、真值、本文方法、DeepLabV3+、U-Net++与标准卷积；自上而下依次为海岸、河网与湖岸", before=4)
 
@@ -263,7 +264,7 @@ rows = [
 ]
 three_line(["配置", "IoU/%"], rows, [8.0, 4.0], fsize=9)
 para("注：数值为5折交叉验证的均值±标准差。", size=9, indent=False, before=2, after=6)
-para("进一步以33个场景为样本、按场景宏平均统计逐场景IoU，并进行配对Wilcoxon符号秩检验："
+para("进一步以33个场景为样本、按场景宏平均统计逐场景IoU，并进行双侧配对Wilcoxon符号秩检验（n=33，未作多重比较校正）："
      "本文方法与标准卷积、U-Net++、"
      "DeepLabV3+及仅4波段配置的逐场景IoU差异分别为+6.52、+8.70、+9.01与+22.02个百分点，"
      "检验的p值均小于0.01，表明上述优势并非由个别场景或随机波动造成。")
@@ -317,6 +318,7 @@ h2("5.1　误差来源")
 para(ERROR_ANALYSIS.format(**NUM))
 h2("5.2　局限与展望")
 para(LIMIT)
+
 
 h1("6　结论")
 for t2 in S5:
