@@ -124,19 +124,24 @@ style_run(p.add_run("(College of Information, Mechanical and Electrical Engineer
                     "Shanghai Normal University, Shanghai 201418, China)"), 9, TNR, TNR)
 
 EN_ABS = (
-    "Flood mapping from optical imagery suffers from fragmented water boundaries, cloud "
-    "contamination and limited use of multi-band information. A lightweight U-Net with "
-    "multi-band input is proposed. Depthwise separable convolutions replace the standard "
-    "3×3 convolutions, cutting the parameters to 1.07×10⁶. Sixteen bands are used as input, "
-    "and a normalized difference water index (NDWI) channel is added in an extended "
-    "experiment. Under scene-wise five-fold cross validation on the USGS flood subset, the "
-    "model reaches an IoU of {IoU_BASE}%, an F1 of {F1_BASE}% and an overall accuracy of "
-    "{OA_BASE}%, outperforming a standard U-Net ({STD_IoU}%), U-Net++ ({U_IoU}%) and "
-    "DeepLabV3+ ({D_IoU}%). Adding NDWI raises the IoU to {NDWI_IoU}%, while using only the "
-    "first four bands lowers it to {B4_IoU}%. External validation on independent WorldFloods "
-    "events reaches an IoU of 91.00%. The model transfers to six Sentinel-2 "
-    "acquisitions over Poyang Lake (2019–2024) without fine-tuning, and supports a scenario "
-    "assessment of slope-scale water retention in which 26.4% of the 1 km cells are in deficit."
+    "Surface water mapping from optical imagery suffers from fragmented water boundaries, "
+    "cloud contamination and insufficient use of multi-band information. A lightweight U-Net "
+    "with multi-band input is proposed. Depthwise separable convolutions replace the standard "
+    "3x3 convolutions, reducing the parameters to 1.07x10^6. Thirteen Sentinel-2 spectral bands "
+    "are used, while the raw tensor keeps 16 channels whose three quality channels are all zero "
+    "in the training subset. Scene-wise five-fold cross validation on the USGS subset gives an "
+    "IoU of {IoU_BASE}%, an F1 of {F1_BASE}% and an overall accuracy of {OA_BASE}%, higher than "
+    "a standard U-Net ({STD_IoU}%), U-Net++ ({U_IoU}%) and DeepLabV3+ ({D_IoU}%) with only 13.7% "
+    "to 4.0% of their parameters. Band ablation shows that removing the near-infrared band lowers "
+    "the IoU to {B4_IoU}%, whereas four bands including near-infrared reach {RGB_IoU}%, comparable "
+    "to the 13-band input, indicating that the discriminative information is already saturated in "
+    "the near-infrared; adding an NDWI channel further raises the IoU to {NDWI_IoU}%. External "
+    "validation on five WorldFloods events screened for temporal consistency yields an IoU of "
+    "91.00%. Without fine-tuning, the model transfers to six flood-season Sentinel-2 acquisitions "
+    "over Poyang Lake (2019-2024), where the mapped water fraction varies between 21.26% and "
+    "47.52%. A slope-scale retention scenario analysis excluding water-dominated cells shows that "
+    "26.4% of the cells are in deficit, with elevation and wetland fraction being the main "
+    "correlates."
 ).format(**NUM)
 p = para(indent=False, after=3, spacing=1.32, size=9, en=TNR)
 style_run(p.add_run("Abstract: "), 9, TNR, TNR, True)
@@ -234,8 +239,7 @@ para("作为对照，若将阈值交由Otsu法在训练场景上自动确定，N
      "39.59%与47.79%，且折间在6.34%~96.92%之间剧烈波动——部分折上Otsu选出的阈值甚至为负值，"
      "说明无监督自动阈值对场景条件高度敏感。这一结果与引言所述“阈值对地表状态敏感”相印证，"
      "也说明简单阈值法与学习型方法之间并非仅差数个百分点，而是差在跨场景的稳定性；"
-     "这一现象与赵爽等[21]对多种水体指数的对比结论一致。"
-     "这一现象与赵爽等[13]对多种水体指数的对比结论一致。")
+     "这一现象与赵爽等[21]对多种水体指数的对比结论一致。")
 t = S3_REST[0]
 for txt in t[1]:
     para(txt.format(**NUM))
