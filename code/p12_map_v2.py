@@ -17,7 +17,7 @@ if os.path.exists(fp):
     plt.rcParams["font.family"] = font_manager.FontProperties(fname=fp).get_name()
 plt.rcParams["axes.unicode_minus"] = False
 
-F2 = os.path.expanduser("~/sy/F2")
+F2 = os.path.expanduser("~/F2")
 freq = np.load(os.path.join(F2, "runs", "poyang", "freq.npy"))
 BBOX = (115.90, 28.90, 116.45, 29.60)
 CRS = "EPSG:32650"

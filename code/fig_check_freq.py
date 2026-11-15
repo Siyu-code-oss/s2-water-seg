@@ -6,7 +6,7 @@ import numpy as np
 import rasterio
 from rasterio.warp import transform_bounds
 
-F2 = os.path.expanduser("~/sy/F2")
+F2 = os.path.expanduser("~/F2")
 freq = np.load(os.path.join(F2, "runs", "poyang", "freq.npy"))
 BBOX = (115.90, 28.90, 116.45, 29.60)
 CRS = "EPSG:32650"

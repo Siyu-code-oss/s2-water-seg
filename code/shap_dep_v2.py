@@ -17,7 +17,7 @@ if os.path.exists(fp):
     plt.rcParams["font.family"] = font_manager.FontProperties(fname=fp).get_name()
 plt.rcParams["axes.unicode_minus"] = False
 
-F2 = os.path.expanduser("~/sy/F2")
+F2 = os.path.expanduser("~/F2")
 P4 = os.path.join(F2, "runs", "p4")
 rows = json.load(open(os.path.join(P4, "cells.json")))
 FEATS = ["f_water", "f_built", "f_crop", "f_tree", "f_grass", "f_wetland",
