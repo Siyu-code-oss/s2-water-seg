@@ -17,7 +17,7 @@ if os.path.exists(fp):
     plt.rcParams["font.family"] = font_manager.FontProperties(fname=fp).get_name()
 plt.rcParams["axes.unicode_minus"] = False
 
-F2 = os.path.expanduser(os.environ.get("F2_ROOT","~/F2"))
+F2 = os.path.expanduser("~/sy/F2")
 freq = np.load(os.path.join(F2, "runs", "poyang", "freq.npy"))
 BBOX = (115.90, 28.90, 116.45, 29.60)
 CRS = "EPSG:32650"
@@ -50,9 +50,8 @@ ax.annotate("N", xy=(right - 0.08 * (right - left), top - 0.05 * (top - bottom))
 
 cb = fig.colorbar(im, ax=ax, fraction=0.04, pad=0.02)
 cb.set_label("水体出现频率")
-ax.set_title("鄱阳湖2019—2024年多时相水体出现频率", fontsize=9)
 ax.text(0.02, 0.02, "灰色为无有效观测区域", transform=ax.transAxes, fontsize=7,
         color="#4A5C6E", bbox=dict(fc="white", ec="none", alpha=0.8, pad=1.5))
 fig.tight_layout()
 fig.savefig(os.path.join(F2, "out", "figs", "fig_freq.png"), dpi=300)
-print("saved fig_freq with graticule")
+print("saved fig_freq without in-figure title")
