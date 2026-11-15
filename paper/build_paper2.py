@@ -88,16 +88,13 @@ p = para(align=CENTER, indent=False, after=8, spacing=1.2)
 style_run(p.add_run("（上海师范大学 信息与机电工程学院，上海 201418）"), 9, KAI, TNR)
 
 ABSTRACT = (
-    "针对光学遥感地表水体提取中水体边界破碎、云覆盖干扰与多波段信息利用不足的问题，"
-    "提出一种多波段输入的轻量化U-Net方法。以深度可分离卷积替换标准卷积，将参数量压缩至1.07×10⁶；"
-    "输入为13个Sentinel-2光谱波段（原始张量保留16通道，其中3个质量通道在训练子集中恒为零）。"
-    "在USGS子集上按场景开展5折交叉验证，模型IoU达{IoU_BASE}%、F1为{F1_BASE}%、总体精度为{OA_BASE}%，"
-    "高于标准U-Net（{STD_IoU}%）、U-Net++（{U_IoU}%）与DeepLabV3+（{D_IoU}%），参数量分别为三者的13.7%、4.1%与4.0%。"
-    "波段消融显示：缺失近红外时IoU降至{B4_IoU}%，含近红外的4波段输入为{RGB_IoU}%，与13波段相当，"
-    "说明判别信息在近红外已基本饱和；引入NDWI通道可进一步升至{NDWI_IoU}%。"
-    "经时相一致性筛选后，5个独立WorldFloods事件的外部验证IoU达91.00%；模型无需微调即可迁移至"
-    "鄱阳湖2019—2024年6期汛期影像，水体比例在21.26%~47.52%之间变化。剔除水体主导单元后的坡面滞蓄"
-    "情景分析表明，26.4%的单元处于赤字，高程与湿地比例是主要的关联因子。"
+    "针对光学遥感水体提取中边界破碎、云干扰与多波段信息利用不足的问题，"
+    "提出一种多波段输入的轻量化U-Net方法：以深度可分离卷积替换标准卷积，参数量降至1.07×10⁶，"
+    "输入为13个Sentinel-2光谱波段。在USGS子集上按场景开展5折交叉验证，IoU达{IoU_BASE}%、F1为{F1_BASE}%，"
+    "高于标准U-Net、U-Net++与DeepLabV3+；波段消融表明缺失近红外时IoU降至{B4_IoU}%，"
+    "而含近红外的4波段即达{RGB_IoU}%，判别信息在近红外已基本饱和。"
+    "模型无需微调即可迁移至鄱阳湖6期汛期影像，水体比例在21.26%~47.52%之间变化；"
+    "坡面滞蓄情景分析显示26.4%的单元处于赤字。方法兼顾精度与轻量化，可为地表水体动态监测提供参考。"
 ).format(**NUM)
 
 p = para(indent=False, after=3, spacing=1.36, size=9)
@@ -116,7 +113,7 @@ style_run(p.add_run("A"), 9)
 
 p = para(align=CENTER, indent=False, before=9, after=4, spacing=1.2)
 style_run(p.add_run("A Lightweight Multi-band U-Net for Surface Water Mapping from "
-                    "Sentinel-2 Imagery: A Poyang Lake Case Study"), 14, TNR, TNR, True)
+                    "Sentinel-2 Imagery over Poyang Lake"), 14, TNR, TNR, True)
 p = para(align=CENTER, indent=False, after=2, spacing=1.2)
 style_run(p.add_run("　　　　　　"), 11, TNR, TNR)
 p = para(align=CENTER, indent=False, after=6, spacing=1.2)
