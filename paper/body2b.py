@@ -26,7 +26,9 @@ S3_REST = [
         "指数是辅助”的判断一致。",
         "此外，将深度可分离卷积换回标准卷积（参数量由1.07×10⁶增至7.78×10⁶）后，"
         "损失函数方面，单一交叉熵与Focal损失的IoU分别为{BCE_IoU}%与{FOCAL_IoU}%，"
-        "与交叉熵+Dice组合（{IoU_BASE}%）的差异均小于折间标准差，说明本文结论对损失形式不敏感。"
+        "与交叉熵+Dice组合（{IoU_BASE}%）的差异均小于折间标准差。单一交叉熵虽略高约0.9个百分点，"
+        "但其在边界区域的重叠度约束较弱；Dice项对前景占比敏感、能改善小目标与岸线的收敛，"
+        "故本文最终采用组合损失，并在表4中同时列出两者结果以供比较。"
         "IoU反而略低（{STD_IoU}%），说明轻量化并未损失精度，反而可能因减少过拟合而受益。",
     ]),
     ("3.4 跨数据集迁移", [
@@ -44,7 +46,8 @@ S3_REST = [
 
 S4 = [
     ("4.1 多时相水体出现频率", [
-        "所用6期影像均取自汛期（6—9月）。将6期水体掩膜的叠加结果按有效观测次数归一化，得到逐像元的水体出现频率。"
+        "所用6期影像均取自汛期（6—9月）。将6期水体掩膜的叠加结果按有效观测次数归一化，得到逐像元的水体出现频率，"
+        "其思路与Pekel等[22]基于全球地表水产品的频率统计一致，区别在于本文频率由学习型分割结果累计得到。"
         "频率如图6所示，湖区主体频率接近1，说明这些区域在全部有效观测中均为水体；"
         "湖滨滩地与入湖河口频率介于0.2~0.6之间，是洪水的往复消长带；"
         "频率大于0.5的区域占研究区的27.4%。图中白色区域为6期中均被云遮挡、无有效观测的区域，"
@@ -53,7 +56,7 @@ S4 = [
     ("4.2 坡面尺度滞蓄供需", [
         "为初步评估研究区下垫面的雨洪消纳能力，在坡面尺度（仅计产流与地表滞蓄，不含河湖库容调蓄）"
         "以1 km网格开展情景计算。曲线数CN按地类赋值（林地60、草地70、耕地78、建设用地92、湿地85），"
-        "该范式与生态水文调节服务的量化方法一致[14]，"
+        "该范式与生态水文调节服务的量化方法一致[23]，"
         "按网格内各地类占比加权；设计降雨取100 mm、前期土壤湿润程度为中等（AMCⅡ）；"
         "以产流超出滞蓄20%作为赤字阈值。",
         "结果表明，评价单元的平均产流为53.6 mm、滞蓄为46.4 mm。水体主导单元（水体占比超过50%）"
@@ -100,22 +103,22 @@ REFS = [
     'RONNEBERGER O, FISCHER P, BROX T. U-Net: convolutional networks for biomedical image segmentation [C]//Medical Image Computing and Computer-Assisted Intervention. Cham: Springer, 2015: 234-241.',
     'ZHOU Z, SIDDIQUEE M M R, TAJBAKHSH N, et al. UNet++: a nested U-Net architecture for medical image segmentation [C]//Deep Learning in Medical Image Analysis and Multimodal Learning for Clinical Decision Support. Cham: Springer, 2018: 3-11.',
     'CHEN L C, ZHU Y, PAPANDREOU G, et al. Encoder-decoder with atrous separable convolution for semantic image segmentation [C]//Proceedings of the European Conference on Computer Vision. 2018: 801-818.',
+    'HU J, SHEN L, SUN G. Squeeze-and-excitation networks [C]//Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition. 2018: 7132-7141.',
+    'ISIKDOGAN F, BOVIK A C, PASSALACQUA P. Surface water mapping by deep learning [J]. IEEE Journal of Selected Topics in Applied Earth Observations and Remote Sensing, 2017, 10(11): 4909-4918.',
+    'DE VRIES B, HUANG C, ARMBRUSTER J, et al. Exploring Sentinel-1 and Sentinel-2 diversity for flood inundation mapping using deep learning [J]. ISPRS Journal of Photogrammetry and Remote Sensing, 2021, 180: 163-173.',
+    '邓开元, 任超. 多光谱光学遥感影像水体提取模型 [J]. 测绘学报, 2021, 50(10): 1370-1379.',
+    '吴庆双, 汪明秀, 申茜, 等. Sentinel-2遥感图像的细小水体提取 [J]. 遥感学报, 2022, 26(4): 781-794.',
+    '刘小燕, 崔耀平, 史志方, 等. GEE平台下多源遥感影像对洪灾的监测 [J]. 遥感学报, 2023, 27(9): 2179-2190.',
+    '张兵. 遥感大数据时代与智能信息提取 [J]. 武汉大学学报(信息科学版), 2018, 43(12): 1861-1871.',
+    '李德仁, 张良培, 夏桂松. 遥感大数据自动分析与数据挖掘 [J]. 测绘学报, 2014, 43(12): 1211-1216.',
     'TELLMAN B, SULLIVAN J A, KUHN C, et al. Satellite imaging reveals increased proportion of population exposed to floods [J]. Nature, 2021, 596: 80-86.',
     'CHOLLET F. Xception: deep learning with depthwise separable convolutions [C]//Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition. 2017: 1251-1258.',
     '许苗, 李元祥, 钟娟娟, 等. L-UNet: 轻量化云遮挡道路提取网络 [J]. 中国图象图形学报, 2021, 26(11): 3274-3285.',
     '赵爽, 李虎, 王瑾, 等. 基于Sentinel-2影像的多种水体指数法提取地表水对比研究 [J]. 遥感技术与应用, 2024, 39(2): 502-513.',
+    'PEKEL J F, COTTAM A, GORELICK N, et al. High-resolution mapping of global surface water and its long-term changes [J]. Nature, 2016, 540: 418-422.',
     '孙喆, 张雪葳. 未来极端降水下的山区乡村生态水文调节服务多情景预测 [J]. 风景园林, 2025, 32(3): 102-109.',
     '王敬明, 王世新, 王福涛, 等. 基于Sentinel-1 SAR数据洪水淹没提取方法研究 [J]. 灾害学, 2021, 36(4): 214-220.',
-    '李琦, 郭中华, 李小军, 等. 基于动态增强型的DE-DeepLabV3+多光谱水体分割研究 [J]. 自然资源遥感, 2026, 38(3): 32-41.',
-    'ISIKDOGAN F, BOVIK A C, PASSALACQUA P. Surface water mapping by deep learning [J]. IEEE Journal of Selected Topics in Applied Earth Observations and Remote Sensing, 2017, 10(11): 4909-4918.',
-    'PEKEL J F, COTTAM A, GORELICK N, et al. High-resolution mapping of global surface water and its long-term changes [J]. Nature, 2016, 540: 418-422.',
-    'HU J, SHEN L, SUN G. Squeeze-and-excitation networks [C]//Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition. 2018: 7132-7141.',
-    '张兵. 遥感大数据时代与智能信息提取 [J]. 武汉大学学报(信息科学版), 2018, 43(12): 1861-1871.',
-    '李德仁, 张良培, 夏桂松. 遥感大数据自动分析与数据挖掘 [J]. 测绘学报, 2014, 43(12): 1211-1216.',
     '郭山川, 杜培军, 蒙亚平, 等. 时序Sentinel-1A数据支持的长江中下游汛情动态监测 [J]. 遥感学报, 2021, 25(10): 2127-2141.',
-    '刘小燕, 崔耀平, 史志方, 等. GEE平台下多源遥感影像对洪灾的监测 [J]. 遥感学报, 2023, 27(9): 2179-2190.',
-    '吴庆双, 汪明秀, 申茜, 等. Sentinel-2遥感图像的细小水体提取 [J]. 遥感学报, 2022, 26(4): 781-794.',
-    '邓开元, 任超. 多光谱光学遥感影像水体提取模型 [J]. 测绘学报, 2021, 50(10): 1370-1379.',
     '吴燕如, 连旭刚, 高玉蓉. 基于哨兵数据相干性的洪水淹没范围确定方法 [J]. 测绘通报, 2022(11): 96-100.',
-    'DE VRIES B, HUANG C, ARMBRUSTER J, et al. Exploring Sentinel-1 and Sentinel-2 diversity for flood inundation mapping using deep learning [J]. ISPRS Journal of Photogrammetry and Remote Sensing, 2021, 180: 163-173.',
+    '李琦, 郭中华, 李小军, 等. 基于动态增强型的DE-DeepLabV3+多光谱水体分割研究 [J]. 自然资源遥感, 2026, 38(3): 32-41.',
 ]
