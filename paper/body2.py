@@ -130,7 +130,7 @@ S3 = [
         "DeepLabV3+[9]，以及SegFormer（MiT-B0）——后者作为轻量Transformer基线，用于检验卷积结构与Transformer结构在本任务上的性能差异；"
         "消融模型则与本文同骨干、仅改变输入波段。"
         "所有深度模型使用同一数据划分、同一损失函数与优化器，训练轮数与早停策略一致。"
-        "本文的代码、切块脚本与逐折结果文件公开于 https://github.com/Siyu-code-oss/SAR ，"
+        "本文的代码、切块脚本与逐折结果文件公开于 https://github.com/Siyu-code-oss/s2-water-seg ，"
         "训练权重与原始影像体积较大，可向作者索取。",
     ]),
 ]

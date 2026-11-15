@@ -1,0 +1,10 @@
+torch==2.5.1
+numpy
+rasterio
+scikit-image
+scikit-learn
+shap
+segmentation-models-pytorch==0.6.0
+matplotlib
+thop
+py7zr
