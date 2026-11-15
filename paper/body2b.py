@@ -111,7 +111,7 @@ REFS = [
     'CHEN L C, ZHU Y, PAPANDREOU G, et al. Encoder-decoder with atrous separable convolution for semantic image segmentation [C]//Proceedings of the European Conference on Computer Vision. 2018: 801-818.',
     'HU J, SHEN L, SUN G. Squeeze-and-excitation networks [C]//Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition. 2018: 7132-7141.',
     'ISIKDOGAN F, BOVIK A C, PASSALACQUA P. Surface water mapping by deep learning [J]. IEEE Journal of Selected Topics in Applied Earth Observations and Remote Sensing, 2017, 10(11): 4909-4918.',
-    'DE VRIES B, HUANG C, ARMBRUSTER J, et al. Exploring Sentinel-1 and Sentinel-2 diversity for flood inundation mapping using deep learning [J]. ISPRS Journal of Photogrammetry and Remote Sensing, 2021, 180: 163-173.',
+    '蒋少伟, 王珅, 唐帅, 等. 协同光学和SAR卫星影像的洪水信息提取 [J]. 遥感技术与应用, 2026, 41(5): 1152-1162.',
     '邓开元, 任超. 多光谱光学遥感影像水体提取模型 [J]. 测绘学报, 2021, 50(10): 1370-1379.',
     '吴庆双, 汪明秀, 申茜, 等. Sentinel-2遥感图像的细小水体提取 [J]. 遥感学报, 2022, 26(4): 781-794.',
     '刘小燕, 崔耀平, 史志方, 等. GEE平台下多源遥感影像对洪灾的监测 [J]. 遥感学报, 2023, 27(9): 2179-2190.',
