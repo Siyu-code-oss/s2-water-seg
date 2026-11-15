@@ -124,7 +124,7 @@ EN_ABS = (
     "Surface water mapping from optical imagery suffers from fragmented water boundaries, "
     "cloud contamination and insufficient use of multi-band information. A lightweight U-Net "
     "with multi-band input is proposed. Depthwise separable convolutions replace the standard "
-    "3x3 convolutions, reducing the parameters to 1.07x10^6. Thirteen Sentinel-2 spectral bands "
+    "3×3 convolutions, reducing the parameters to 1.07×10⁶. Thirteen Sentinel-2 spectral bands "
     "are used, while the raw tensor keeps 16 channels whose three quality channels are all zero "
     "in the training subset. Scene-wise five-fold cross validation on the USGS subset gives an "
     "IoU of {IoU_BASE}%, an F1 of {F1_BASE}% and an overall accuracy of {OA_BASE}%, higher than "
@@ -217,9 +217,10 @@ caption("表3　不同方法的5折交叉验证结果", before=4, after=2, keep_
 MET = {"std": ("92.45", "99.14", "98.01", "87.94"), "unetpp": ("91.54", "99.07", "96.93", "87.35"),
        "deeplab": ("92.67", "99.18", "97.90", "88.37"), "segformer": ("92.81", "99.23", "96.78", "89.46"),
        "base": ("93.20", "99.13", "98.56", "88.79"), "ndwi": ("93.60", "99.32", "98.18", "89.76")}
-rows.append(["MNDWI>0（物理阈值）", "60.78±23.87", "73.39", "96.48", "63.95", "87.68", "—"])
-rows.append(["NDWI>0（物理阈值）", "80.44±18.54", "88.15", "99.00", "91.05", "87.33", "—"])
-rows = []
+rows = [
+    ["NDWI>0（物理阈值）", "80.44±18.54", "88.15", "99.00", "91.05", "87.33", "—"],
+    ["MNDWI>0（物理阈值）", "60.78±23.87", "73.39", "96.48", "63.95", "87.68", "—"],
+]
 for tag, name, par in [("std", "标准U-Net", "7.78"), ("unetpp", "U-Net++", "26.12"),
                        ("deeplab", "DeepLabV3+", "26.72"), ("segformer", "SegFormer（MiT-B0）", "5.56"),
                        ("base", "本文（13 光谱波段）", "1.07")]:
@@ -227,7 +228,6 @@ for tag, name, par in [("std", "标准U-Net", "7.78"), ("unetpp", "U-Net++", "26
     rows.append([name, ms(folds(tag)), f1, oa, pr, rc, par])
 f1, oa, pr, rc = MET["ndwi"]
 rows.append(["本文+NDWI（17 通道）", ms(folds("ndwi")), f1, oa, pr, rc, "1.07"])
-rows.append(["MNDWI>0（物理阈值）", "60.78±23.87", "73.39", "96.48", "63.95", "87.68", "—"])
 three_line(["方法", "IoU/%", "F1/%", "OA/%", "精确率/%", "召回率/%", "参数量/10⁶"],
            rows, [4.2, 2.5, 2.0, 2.0, 2.2, 2.2, 2.0], fsize=8.5)
 para("注：IoU为5折验证集结果的均值±标准差（折级口径）；F1、OA、精确率与召回率为各折结果的均值；参数量为模型总参数；"
@@ -252,10 +252,10 @@ h2("3.3　消融实验")
 caption("表4　消融实验结果", before=4, after=2, keep_next=True)
 rows = [
     ["本文（13 光谱波段）", ms(B)],
-    ["本文+NDWI（17通道）", ms(folds("ndwi"))],
-    ["标准卷积替换可分离卷积", ms(folds("std"))],
     ["仅使用前4个波段（B1—B4，无近红外）", ms(folds("b4"))],
     ["RGB+近红外（B2/B3/B4/B8）", ms(folds("rgbnir"))],
+    ["本文+NDWI（17通道）", ms(folds("ndwi"))],
+    ["标准卷积替换可分离卷积", ms(folds("std"))],
     ["损失改为单一BCE", ms(folds("bce"))],
     ["损失改为Focal", ms(folds("focal"))],
 ]
