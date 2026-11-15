@@ -17,7 +17,7 @@ if os.path.exists(fp):
     plt.rcParams["font.family"] = font_manager.FontProperties(fname=fp).get_name()
 plt.rcParams["axes.unicode_minus"] = False
 
-F2 = os.path.expanduser(os.environ.get("F2_ROOT","~/F2"))
+F2 = os.path.expanduser("~/sy/F2")
 P4 = os.path.join(F2, "runs", "p4")
 rows = json.load(open(os.path.join(P4, "cells.json")))
 FEATS = ["f_water", "f_built", "f_crop", "f_tree", "f_grass", "f_wetland",
@@ -28,22 +28,20 @@ rf = RandomForestRegressor(n_estimators=500, min_samples_leaf=3, random_state=42
 sv = shap.TreeExplainer(rf).shap_values(X)
 
 fig, axes = plt.subplots(1, 2, figsize=(8.0, 3.4))
-PANELS = ((axes[0], "elev", "(a) 高程/m", 1.0), (axes[1], "f_wetland", "(b) 湿地比例/%", 100.0))
-for ax, feat, label, scale in PANELS:
+PANELS = ((axes[0], "elev", "高程/m", 1.0, "(a) 高程"), (axes[1], "f_wetland", "湿地比例/%", 100.0, "(b) 湿地比例"))
+for ax, feat, label, scale, sub_name in PANELS:
     i = FEATS.index(feat)
     xv = X[:, i] * scale
     ax.scatter(xv, sv[:, i], s=6, alpha=0.5, color="#4E82B2", edgecolors="none")
-    z = np.polyfit(xv, sv[:, i], 1)
-    xs = np.linspace(xv.min(), xv.max(), 50)
-    ax.plot(xs, np.polyval(z, xs), color="#C0392B", lw=1.4)
     ax.axhline(0, color="#8A97A3", lw=0.8, ls=":")
     ax.set_xlabel(label, fontsize=9)
+    ax.text(0.5, -0.30, sub_name, transform=ax.transAxes, ha="center", va="top", fontsize=9)
     ax.set_ylabel("SHAP 值", fontsize=9)
     ax.grid(ls=":", alpha=0.4)
     corr = np.corrcoef(X[:, i], sv[:, i])[0, 1]
     ax.text(0.62, 0.92, "r=%.2f" % corr, transform=ax.transAxes,
             fontsize=9, va="top")
-fig.tight_layout()
+fig.tight_layout(rect=(0, 0.06, 1, 1))
 fig.savefig(os.path.join(F2, "out", "figs", "fig_shap_dep.png"), dpi=300)
 print("saved fig_shap_dep")
 for feat in ("elev", "f_wetland"):

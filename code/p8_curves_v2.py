@@ -20,7 +20,7 @@ RUNS = os.path.expanduser("~/sy/F2/runs")
 FIG = os.path.expanduser("~/sy/F2/out/figs")
 COL = {"base": "#346696", "std": "#8FB3D9", "b4": "#C9D9E8"}
 NAME = {"base": "本文方法", "std": "标准卷积", "b4": "仅4波段"}
-EPOCHS = 60
+EPOCHS = 40
 
 fig, ax = plt.subplots(figsize=(6.2, 3.4))
 for tag in ("base", "std", "b4"):
