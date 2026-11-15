@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Minimal inference demo: one scene -> water mask (CPU or GPU)."""
+"""Minimal inference demo: one scene -> water mask."""
 import numpy as np, torch, sys
 from model import UNet
 

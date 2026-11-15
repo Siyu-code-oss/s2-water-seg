@@ -8,7 +8,7 @@ import rasterio
 from rasterio.warp import transform_bounds
 from rasterio.windows import from_bounds
 
-F2 = os.path.expanduser("~/sy/F2")
+F2 = os.path.expanduser(os.environ.get("F2_ROOT","~/F2"))
 OUT = os.path.join(F2, "data", "s2raw")
 os.makedirs(OUT, exist_ok=True)
 BASE = ("https://sentinel-cogs.s3.us-west-2.amazonaws.com/"

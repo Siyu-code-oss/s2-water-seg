@@ -5,7 +5,7 @@ import json
 import os
 import statistics as st
 
-RUNS = os.path.expanduser("~/sy/F2/runs")
+RUNS = os.path.expanduser("~/F2/runs")
 TAGS = ["base", "std", "b4", "tta"]
 NAME = {"base": "本文方法（轻量+16波段）", "std": "标准卷积（7.77 M）",
         "b4": "仅前4波段", "tta": "本文+TTA"}

@@ -14,10 +14,10 @@ from torch.utils.data import DataLoader
 
 import segmentation_models_pytorch as smp
 
-sys.path.insert(0, os.path.expanduser("~/sy/F2/code"))
+sys.path.insert(0, os.path.expanduser("~/F2/code"))
 from train_usgs import FloodDS, IGN, CHIP_DIR, OUT, evaluate, dice_loss
 
-F2 = os.path.expanduser("~/sy/F2")
+F2 = os.path.expanduser(os.environ.get("F2_ROOT","~/F2"))
 ARCH = {
     "unetpp": lambda: smp.UnetPlusPlus("resnet34", encoder_weights=None,
                                        in_channels=16, classes=1),

@@ -8,10 +8,10 @@ import sys
 import numpy as np
 import torch
 
-sys.path.insert(0, os.path.expanduser("~/sy/F2/code"))
+sys.path.insert(0, os.path.expanduser("~/F2/code"))
 from model import UNet
 
-F2 = os.path.expanduser("~/sy/F2")
+F2 = os.path.expanduser(os.environ.get("F2_ROOT","~/F2"))
 SRC = os.path.join(F2, "data", "poyang")
 OUT = os.path.join(F2, "runs", "poyang")
 os.makedirs(OUT, exist_ok=True)

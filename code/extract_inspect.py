@@ -6,7 +6,7 @@ import sys
 
 import py7zr
 
-F2 = os.path.expanduser("~/sy/F2")
+F2 = os.path.expanduser(os.environ.get("F2_ROOT","~/F2"))
 SRC = os.path.join(F2, "data", "src.7z")
 DST = os.path.join(F2, "data", "src")
 

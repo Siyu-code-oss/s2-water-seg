@@ -8,7 +8,7 @@ import shap
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import KFold, cross_val_score
 
-F2 = os.path.expanduser("~/sy/F2")
+F2 = os.path.expanduser(os.environ.get("F2_ROOT","~/F2"))
 OUT = os.path.join(F2, "runs", "p4")
 rows = json.load(open(os.path.join(OUT, "cells.json")))
 print("cells", len(rows), flush=True)

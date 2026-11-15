@@ -10,7 +10,7 @@ from rasterio.enums import Resampling
 from rasterio.warp import transform_bounds
 from rasterio.windows import from_bounds
 
-F2 = os.path.expanduser("~/sy/F2")
+F2 = os.path.expanduser(os.environ.get("F2_ROOT","~/F2"))
 BASE = ("https://sentinel-cogs.s3.us-west-2.amazonaws.com/"
         "sentinel-s2-l2a-cogs/50/R/%s/%s/%s/%s")
 BBOX = (115.90, 28.90, 116.45, 29.60)

@@ -8,7 +8,7 @@ import time
 import urllib.request
 
 RECORD = "8039317"
-OUT = os.path.expanduser(os.environ.get("DL_OUT", "~/sy/F2/data/src.7z"))
+OUT = os.path.expanduser(os.environ.get("DL_OUT", "~/F2/data/src.7z"))
 PARTS = int(os.environ.get("DL_PARTS", "16"))
 RETRY = 500
 

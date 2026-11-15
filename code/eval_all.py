@@ -10,11 +10,11 @@ import sys
 import numpy as np
 import torch
 
-sys.path.insert(0, os.path.expanduser("~/sy/F2/code"))
+sys.path.insert(0, os.path.expanduser("~/F2/code"))
 from model import UNet
 from train_usgs import FloodDS, IGN, CHIP_DIR, OUT
 
-F2 = os.path.expanduser("~/sy/F2")
+F2 = os.path.expanduser(os.environ.get("F2_ROOT","~/F2"))
 CHIPS17 = os.path.join(F2, "data", "chips17")
 ARCH = ["base", "std", "b4", "ndwi", "unetpp", "deeplab", "segformer"]
 

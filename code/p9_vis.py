@@ -7,7 +7,7 @@ import sys
 import numpy as np
 import torch
 
-sys.path.insert(0, os.path.expanduser("~/sy/F2/code"))
+sys.path.insert(0, os.path.expanduser("~/F2/code"))
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
@@ -23,7 +23,7 @@ if os.path.exists(fp):
     plt.rcParams["font.family"] = font_manager.FontProperties(fname=fp).get_name()
 plt.rcParams["axes.unicode_minus"] = False
 
-FIG = os.path.expanduser("~/sy/F2/out/figs")
+FIG = os.path.expanduser("~/F2/out/figs")
 TP = np.array([0.18, 0.37, 0.55])
 FN = np.array([0.91, 0.64, 0.24])
 FP = np.array([0.75, 0.22, 0.17])

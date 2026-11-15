@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Multi-connection resumable downloader (server side)."""
+"""Multi-connection resumable downloader (command-line tool)."""
 import hashlib
 import json
 import os
@@ -9,7 +9,7 @@ import time
 import urllib.request
 
 RECORD = "8039317"
-OUT = os.path.expanduser("~/sy/F2/data/src.7z")
+OUT = os.path.expanduser("~/F2/data/src.7z")
 PARTS = 16
 
 

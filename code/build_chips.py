@@ -7,7 +7,7 @@ import os
 import numpy as np
 import rasterio
 
-F2 = os.path.expanduser("~/sy/F2")
+F2 = os.path.expanduser(os.environ.get("F2_ROOT","~/F2"))
 SRC = os.path.join(F2, "data", "src")
 OUT = os.path.join(F2, "data", "chips")
 os.makedirs(OUT, exist_ok=True)

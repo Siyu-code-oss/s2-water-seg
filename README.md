@@ -57,6 +57,8 @@ python code/eval_full.py base
 python code/aggregate.py
 ```
 
+脚本默认以 `~/F2` 为数据根目录，可用环境变量 `F2_ROOT` 覆盖。
+
 逐折 IoU 以 `results/f*_*.done` 中的 `best` 字段为准；`splits.json` 与训练脚本使用同一随机种子（42）生成，可直接对齐。
 
 ## 数据说明

@@ -8,7 +8,7 @@ import sys
 
 import torch
 
-sys.path.insert(0, os.path.expanduser("~/sy/F2/code"))
+sys.path.insert(0, os.path.expanduser("~/F2/code"))
 from model import UNet
 from train_usgs import FloodDS, IGN, CHIP_DIR, OUT
 

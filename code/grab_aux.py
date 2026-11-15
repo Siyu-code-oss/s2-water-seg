@@ -3,7 +3,7 @@
 import os
 import urllib.request
 
-F2 = os.path.expanduser("~/sy/F2")
+F2 = os.path.expanduser(os.environ.get("F2_ROOT","~/F2"))
 AUX = os.path.join(F2, "data", "aux")
 os.makedirs(AUX, exist_ok=True)
 

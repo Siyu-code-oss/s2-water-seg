@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""P1.1 COG windowed-read verification (runs on server)."""
+"""P1.1 COG windowed-read verification ."""
 import os
 import time
 

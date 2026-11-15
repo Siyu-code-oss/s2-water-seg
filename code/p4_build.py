@@ -10,7 +10,7 @@ import rasterio
 from rasterio.enums import Resampling
 from rasterio.warp import reproject, transform_bounds
 
-F2 = os.path.expanduser("~/sy/F2")
+F2 = os.path.expanduser(os.environ.get("F2_ROOT","~/F2"))
 AUX = os.path.join(F2, "data", "aux")
 OUT = os.path.join(F2, "runs", "p4")
 os.makedirs(OUT, exist_ok=True)

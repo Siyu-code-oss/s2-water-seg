@@ -7,7 +7,7 @@ import rasterio
 from rasterio.enums import Resampling
 from rasterio.warp import reproject, transform_bounds
 
-F2 = os.path.expanduser("~/sy/F2")
+F2 = os.path.expanduser(os.environ.get("F2_ROOT","~/F2"))
 freq = np.load(os.path.join(F2, "runs", "poyang", "freq.npy"))
 H, W = freq.shape
 BBOX = (115.90, 28.90, 116.45, 29.60)

@@ -9,7 +9,7 @@ import sys
 import numpy as np
 from skimage.filters import threshold_otsu
 
-sys.path.insert(0, os.path.expanduser("~/sy/F2/code"))
+sys.path.insert(0, os.path.expanduser("~/F2/code"))
 from train_usgs import CHIP_DIR, OUT, IGN
 
 B = {"B1": 0, "B2": 1, "B3": 2, "B4": 3, "B5": 4, "B6": 5, "B7": 6, "B8": 7,

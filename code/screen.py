@@ -9,7 +9,7 @@ import numpy as np
 import rasterio
 from rasterio.warp import transform_bounds
 
-F2 = os.path.expanduser("~/sy/F2")
+F2 = os.path.expanduser(os.environ.get("F2_ROOT","~/F2"))
 BASE = ("https://sentinel-cogs.s3.us-west-2.amazonaws.com/"
         "sentinel-s2-l2a-cogs/50/R/%s/%d/%d/%s")
 BBOX = (115.90, 28.80, 116.70, 29.80)   # lon0, lat0, lon1, lat1

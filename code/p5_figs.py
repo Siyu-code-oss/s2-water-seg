@@ -15,7 +15,7 @@ if os.path.exists(FONT):
     plt.rcParams["font.family"] = font_manager.FontProperties(fname=FONT).get_name()
 plt.rcParams["axes.unicode_minus"] = False
 
-F2 = os.path.expanduser("~/sy/F2")
+F2 = os.path.expanduser(os.environ.get("F2_ROOT","~/F2"))
 FIG = os.path.join(F2, "out", "figs")
 os.makedirs(FIG, exist_ok=True)
 RUNS = os.path.join(F2, "runs")
