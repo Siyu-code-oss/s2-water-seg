@@ -188,7 +188,7 @@ for head, ps in S2:
         equation(EQ_RATIO, 2)
         para("当C′较大时，该比值趋近于1/9，即参数量压缩近9倍。")
         add_figure(os.path.join(FIGDIR, "fig_net.png"), 13.6)
-        caption("图2　轻量化U-Net网络结构", before=4)
+        caption("图2　轻量化U-Net网络结构（首层与输出层为标准卷积，编码与解码阶段为深度可分离卷积）", before=4)
     if head.startswith("2.3"):
         equation(EQ_LOSS, 3)
         para("式中：L_{BCE}为二分类交叉熵；X、Y分别为预测与真值水体像元集合；λ为平衡系数，取0.5。"
@@ -248,7 +248,7 @@ for txt in t[1]:
 add_figure(os.path.join(FIGDIR, "fig_box.png"), 12.6)
 caption("图4　不同方法的逐场景IoU分布（33个场景）", before=4)
 add_figure(os.path.join(FIGDIR, "fig_vis.png"), 15.2)
-caption("图5　典型场景的提取结果对比（自上而下依次为海岸、河网与湖岸）", before=4)
+caption("图5　典型场景的提取结果对比：各列依次为影像、真值、本文方法、DeepLabV3+、U-Net++与标准卷积；自上而下依次为海岸、河网与湖岸", before=4)
 
 h2("3.3　消融实验")
 caption("表4　消融实验结果", before=4, after=2, keep_next=True)
