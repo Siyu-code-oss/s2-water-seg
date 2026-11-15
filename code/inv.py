@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
 """S2 scene inventory over the study area (metadata only)."""
 import concurrent.futures as cf
+import os
 import json
 import re
 import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
 
+OUTDIR = os.environ.get("OUTDIR", ".")
 BUCKET = "https://sentinel-cogs.s3.us-west-2.amazonaws.com/"
 TILES = ["LT", "LU", "MT", "MU"]
 YEARS = range(2015, 2025)
@@ -58,7 +60,7 @@ def main():
                 d = re.search(r"_(\d{8})_", s)
                 rows.append((t, y, m, s, d.group(1) if d else ""))
     rows.sort(key=lambda r: (r[4], r[0]))
-    with open("/home/daxiniu12/sy/F2/data/s2_inventory.csv", "w") as f:
+    with open(os.path.join(OUTDIR, "s2_inventory.csv"), "w") as f:
         f.write("tile,year,month,scene,date\n")
         for r in rows:
             f.write("%s,%d,%d,%s,%s\n" % r)
@@ -70,7 +72,7 @@ def main():
     for y in YEARS:
         n = sum(1 for d in uniq if d[:4] == str(y))
         print("  %d: %d dates" % (y, n))
-    json.dump(sorted(uniq), open("/home/daxiniu12/sy/F2/data/s2_dates.json", "w"))
+    json.dump(sorted(uniq), open(os.path.join(OUTDIR, "s2_dates.json"), "w"))
 
 
 if __name__ == "__main__":
