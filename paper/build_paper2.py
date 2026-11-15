@@ -296,7 +296,7 @@ for head, ps in S4:
         para(t2)
     if head.startswith("4.1"):
         add_figure(os.path.join(FIGDIR, "fig_freq.png"), 9.6)
-        caption("图6　鄱阳湖2019—2024年洪水淹没频率", before=4)
+        caption("图6　鄱阳湖2019—2024年汛期多时相水体出现频率", before=4)
     if head.startswith("4.3"):
         add_figure(os.path.join(FIGDIR, "fig_shap.png"), 11.0)
         caption("图7　驱动因子的SHAP贡献", before=4)
